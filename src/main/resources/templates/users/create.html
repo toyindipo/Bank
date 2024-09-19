@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="page-content">
+    <div class="page-subheading page-subheading-md">
+        <ol class="breadcrumb">
+            <li><a th:href="@{/admin/home}">Home</a></li>
+            <li><a th:href="@{/admin/users}">View Users</a></li>
+            <li><a th:href="@{/users/logout}">Logout</a></li>
+            <li class="active">Create User</li>
+        </ol>
+
+    </div>
+
+
+    <div class="container-fluid-md">
+        <div id="content">
+            <div class="am-content">
+                <div class="page-head">
+                    <ol class="breadcrumb">
+                        <li><a th:href="@{/admin/users/create}" class="btn btn-space btn-primary">Create User</a></li>
+                        <li><a th:href="@{/admin/users}" class="btn btn-space btn-primary">View Users</a></li>
+                        <li><a th:href="@{/accounts/transactions}" class="btn btn-space btn-primary">View transactions</a></li>
+                        <li><a th:href="@{/accounts/withdraw}" class="btn btn-space btn-primary">Withdraw</a></li>
+                        <li><a th:href="@{/accounts/deposit}" class="btn btn-space btn-primary">Deposit</a></li>
+                        <li class="active">View</li>
+                    </ol>
+                </div>
+                <div class="container">
+                    <div class="panel-heading">
+                        <h1>New User</h1>
+                    </div>
+                    <p>
+                        <span th:text="${error}" style="color: red"/>
+                    </p>
+                    <form action="#" th:action="@{/admin/users/create}" th:object="${user}"
+                          method="POST">
+                        <input type="text" th:field="*{name}" placeholder="Name"
+                               class="form-control mb-4 col-4">
+                        <input type="text" th:field="*{username}" placeholder="Username"
+                               class="form-control mb-4 col-4">
+                        <input type="password" th:field="*{password}" placeholder="Password"
+                               class="form-control mb-4 col-4">
+
+                        <button type="submit" class="btn btn-info col-2">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

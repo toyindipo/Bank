@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="page-content">
+    <div class="page-subheading page-subheading-md">
+        <ol class="breadcrumb">
+            <li><a th:href="@{/users/home}">Home</a></li>
+            <li><a th:href="@{/users/logout}">Logout</a></li>
+            <li class="active">Withdraw</li>
+        </ol>
+
+    </div>
+    <div class="container">
+        <div class="panel-heading">
+            <h1>Withdraw</h1>
+            <h3 th:text="'Balance: ' + ${user.account.balance}"></h3>
+        </div>
+        <p>
+            <span th:text="${error}" style="color: red"/>
+        </p>
+        <form action="#" th:action="@{/accounts/withdraw}" th:object="${accountPosting}"
+              method="POST">
+            <input type="number" th:field="*{amount}" placeholder="Amount"
+                   class="form-control mb-4 col-4">
+
+            <button type="submit" class="btn btn-info col-2">Withdraw</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

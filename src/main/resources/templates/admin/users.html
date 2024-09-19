@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+
+<div class="page-content">
+    <div class="page-subheading page-subheading-md">
+        <ol class="breadcrumb">
+            <li><a th:href="@{/admin/home}">Home</a></li>
+            <li><a th:href="@{/users/logout}">Logout</a></li>
+            <li class="active">Users</li>
+        </ol>
+
+    </div>
+
+    <div class="container-fluid-md">
+        <div id="content">
+            <div class="am-content">
+                <div class="page-head">
+                    <ol class="breadcrumb">
+                        <li><a th:href="@{/admin/users/create}" class="btn btn-space btn-primary">Create User</a></li>
+                        <li><a th:href="@{/admin/users}" class="btn btn-space btn-primary">View Users</a></li>
+                        <li><a th:href="@{/accounts/transactions}" class="btn btn-space btn-primary">View transactions</a></li>
+                        <li><a th:href="@{/accounts/withdraw}" class="btn btn-space btn-primary">Withdraw</a></li>
+                        <li><a th:href="@{/accounts/deposit}" class="btn btn-space btn-primary">Deposit</a></li>
+                        <li class="active">View</li>
+                    </ol>
+                </div>
+
+                <div class="container">
+                    <p>
+                        <span th:text="${error}" style="color: red"/>
+                    </p>
+                    <div class="tab-content">
+                        <div id="users" class="tab-pane fade  in active">
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th> Username </th>
+                                            <th> Name </th>
+                                            <th> Account Number </th>
+                                            <th> Balance </th>
+                                            <th> Deactivated </th>
+                                            <th> Action </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:if="${users.isEmpty()}">
+                                            <td colspan="2"> No Users Available </td>
+                                        </tr>
+                                        <tr th:each="user : ${users}">
+                                            <td><span th:text="${user.username}"> Username </span></td>
+                                            <td><span th:text="${user.name}"> Name </span></td>
+                                            <td><span th:text="${user.account.accountNumber}"> Account </span></td>
+                                            <td><span th:text="${user.account.balance}"> Balance </span></td>
+                                            <td><span th:text="${user.deactivated}"> Deactivated </span></td>
+                                            <td><form th:id="'deactivateUser_' + ${user.id}" th:action="@{/admin/users/{username}/status(username=${user.username})}" method="POST">
+                                                <input type="hidden" th:value="${user.username}" name="username"/>
+                                                <button type="submit" class="btn btn-info col-2" th:text="${user.deactivated ? 'Activate' : 'Deactivate'}">Deactivate</button>
+                                            </form>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
